@@ -32,8 +32,7 @@ import {
   Palette, 
   RotateCcw,
   Zap,
-  Info,
-  X
+  Info
 } from 'lucide-react';
 import { loadStoredIconConfig, applyAppIconToBrowser } from './utils/appIconManager';
 
@@ -69,7 +68,6 @@ export default function App() {
   const [isPrintModalOpen, setIsPrintModalOpen] = useState(false);
   const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
-  const [isQuickBannerDismissed, setIsQuickBannerDismissed] = useState(false);
 
   // Apply stored custom app icon and detect standalone PWA mode on mount
   useEffect(() => {
@@ -600,49 +598,6 @@ export default function App() {
         onClose={() => setIsInstallModalOpen(false)}
         theme={currentTheme}
       />
-
-      {/* Floating Quick Action Pill for Mobile Screen Pin & Custom Icon */}
-      {!isStandalone && !isQuickBannerDismissed && (
-        <aside 
-          aria-label="Ghim ra màn hình chính & đổi icon"
-          className="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[94%] max-w-md animate-in slide-in-from-bottom-4 duration-300"
-        >
-          <div className="bg-slate-900/95 backdrop-blur-md text-white p-2.5 sm:p-3 rounded-2xl shadow-2xl border border-amber-400/50 flex items-center justify-between gap-2.5 ring-1 ring-white/10">
-            <button
-              onClick={() => setIsInstallModalOpen(true)}
-              className="flex items-center gap-2.5 text-left flex-1 min-w-0 cursor-pointer group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-300 text-slate-950 flex items-center justify-center text-xl font-black shrink-0 shadow-md group-hover:scale-105 transition-transform">
-                📱
-              </div>
-              <div className="truncate">
-                <div className="text-xs font-black text-amber-300 flex items-center gap-1.5">
-                  <span>Ghim Màn Hình & Đổi Icon</span>
-                  <span className="text-[10px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.2 rounded-full">Tiện ích</span>
-                </div>
-                <div className="text-[11px] text-slate-300 truncate">
-                  Bấm để chọn icon đẹp & ghim ra điện thoại
-                </div>
-              </div>
-            </button>
-            <div className="flex items-center gap-1.5 shrink-0">
-              <button
-                onClick={() => setIsInstallModalOpen(true)}
-                className="px-3 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 active:scale-95 text-slate-950 font-black text-xs shadow-md transition cursor-pointer"
-              >
-                Mở Ngay
-              </button>
-              <button
-                onClick={() => setIsQuickBannerDismissed(true)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition cursor-pointer"
-                title="Đóng thanh thông báo"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </aside>
-      )}
 
       {/* Toast Notification */}
       {toastMessage && (
